@@ -1,26 +1,26 @@
 # Sprint-4-Testes-de-API
 # Testes de API com Postman
 
-Este projeto tem como objetivo o estudo e a pratica de tecnicas de
+Este projeto tem como objetivo o estudo e a pratica de técnicas de
 testes de API utilizando o Postman. O foco esta no design de testes,
-na estruturacao de colecoes e na validacao automatizada de respostas,
+na estruturacao de coleções e na validacao automatizada de respostas,
 cobrindo cenarios funcionais, de contrato, de erros e de integridade
 de dados.
 
 ## Sobre Testes de API
 
 Testes de API consistem em validar diretamente as interfaces de
-programacao de aplicacoes, verificando se as requisicoes e respostas
+programação de aplicações, verificando se as requisiçoes e respostas
 estao em conformidade com o contrato esperado. Esse tipo de teste e
 fundamental porque as APIs conectam diferentes sistemas e camadas da
-aplicacao, sendo essenciais para garantir integracao confiavel,
-seguranca e desempenho.
+aplicação, sendo essenciais para garantir integração confiavel,
+segurança e desempenho.
 
 Principais tipos de testes de API:
 
 -  Funcionais: verificam se os endpoints retornam os resultados
    esperados para cenarios validos.
--  Validacao de contrato: conferem status codes, cabecalhos e
+-  Validacao de contrato: conferem status codes, cabeçalhos e
    estrutura do corpo da resposta.
 -  Tratamento de erros: avaliam o comportamento da API frente a
    entradas invalidas, parametros ausentes e acessos nao autorizados.
@@ -31,7 +31,7 @@ Principais tipos de testes de API:
 
 ### Validacao de Contrato
 
-A validacao de contrato verifica se a resposta da API esta em
+A validação de contrato verifica se a resposta da API esta em
 conformidade com o que foi acordado entre as partes. Isso inclui:
 
 -  Codigos de status HTTP adequados para cada cenario.
@@ -54,8 +54,8 @@ Esses testes verificam o comportamento da API em situacoes adversas:
 
 -  Entradas invalidas e mal formatadas.
 -  Parametros obrigatorios ausentes.
--  Acessos nao autorizados ou sem autenticacao.
--  Valores nos limites aceitos pela aplicacao.
+-  Acessos nao autorizados ou sem autenticação.
+-  Valores nos limites aceitos pela aplicação.
 
 ### Testes de Integridade de Dados
 
