@@ -71,8 +71,8 @@ retornadas estao corretas e consistentes:
 O Postman e uma ferramenta amplamente utilizada para desenvolvimento e
 testes de APIs. Os principais recursos utilizados neste projeto sao:
 
--  Colecoes e organizacao em pastas: agrupamento de requisicoes por
-   funcionalidade ou recurso, facilitando a manutencao e a execucao
+-  Coleçoes e organizacao em pastas: agrupamento de requisiçoes por
+   funcionalidade ou recurso, facilitando a manutencao e a execução
    seletiva.
 -  Variaveis: uso de variaveis de ambiente, globais e em nivel de
    colecao para parametrizar URLs, tokens e dados de entrada.
@@ -84,10 +84,10 @@ testes de APIs. Os principais recursos utilizados neste projeto sao:
 -  Assercoes com Chai no Postman: uso de pm.test e pm.expect para
    escrever assercoes legiveis e robustas.
 -  Gerenciamento de ambientes: ambientes separados para
-   desenvolvimento, homologacao e producao, evitando mistura de
+   desenvolvimento, homologação e produção, evitando mistura de
    configuracoes.
 
-## Exemplos de Assercoes
+## Exemplos de Asserçoes
 
 | Assercao | Descricao |
 | --- | --- |
