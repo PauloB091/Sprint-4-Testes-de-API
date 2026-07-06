@@ -1,0 +1,212 @@
+ID,Título do caso de teste,Etapas do teste,Dados do teste (corpo da solicitação),Resultado esperado,Resultado real,Status,Link para o relatório de bug
+Requisito 1: /api/v1/kits/:id/products,,,,,,,
+1,Adicionar produtos existentes a um kit,1. Envie uma solicitação POST para /api/v1/kits/:id/products com um ID de kit existente na URL e um ID de produto no corpo da solicitação.,"Path params: id=2 
+{
+ ""productsList"": [
+ {
+ ""id"": 1,
+ ""quantity"":
+ 2
+ }
+ ]
+ }",200 OK ,200 OK ,APROVADO,
+2,Não é possivel adicionar produtos a um kit com 30 itens,1. Envie uma solicitação POST para /api/v1/kits/1/products com dados validos de modo a execeder 30 produtos,"{
+    ""productsList"": [
+        {
+            ""id"": 1,
+            ""quantity"": 2
+        },
+        {
+            ""id"": 6,
+            ""quantity"": 2
+        }
+    ]
+}",400 bad request,400 bad request,aprovado,
+3,É possivel adicionar produtos a um kit com 0 itens,1. Envie uma solicitação POST para /api/v1/kits/7/products com dados validos,"{
+    ""productsList"": [
+        {
+            ""id"": 1,
+            ""quantity"": 2
+        }
+    ]
+}",200 ok,200 ok,aprovado,
+4,É possivel adicionar produtos a um kit com 1 itens,1. Envie uma solicitação POST para /api/v1/kits/7/products com dados validos,"{
+    ""productsList"": [
+        {
+            ""id"": 3,
+            ""quantity"": 2
+        }
+    ]
+}",200 ok,200 ok,aprovado,
+5,É possivel adicionar produtos a um kit com 29 itens,1. Envie uma solicitação POST para /api/v1/kits/2/products com dados validos,"{
+    ""productsList"": [
+        {
+            ""id"": 3,
+            ""quantity"": 2
+        }
+    ]
+}",200 ok,200 ok,aprovado,
+6,Não é possivel adicionar produtos a um kit com 31 itens,1. Envie uma solicitação POST para /api/v1/kits/7/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": 35,
+            ""quantity"": 1
+        }
+    ]
+}",400 bad request,400 bad request,aprovado,
+7,Não é possivel adicionar produtos a um kit dados invalidos (produto inexistente),1. Envie uma solicitação POST para /api/v1/kits/7/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": 200,
+            ""quantity"": 1
+        }
+    ]
+}",400 bad request,200 ok,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-1
+8,Não é possivel adicionar produtos a um kit dados invalidos (kit inexistente),1. Envie uma solicitação POST para /api/v1/kits/10/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": 1,
+            ""quantity"": 1
+        }
+    ]
+}",404 not found,404 not found,aprovado,
+9,Não é possivel adicionar produtos a um kit dados invalidos (simbolos especiais),1. Envie uma solicitação POST para /api/v1/kits/7/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": !,
+            ""quantity"": 1
+        }
+    ]
+}",400 bad request,400 bad request,aprovado,
+10,Não é possivel adicionar produtos a um kit dados invalidos (vazio),1. Envie uma solicitação POST para /api/v1/kits/7/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": ,
+            ""quantity"": 1
+        }
+    ]
+}",400 bad request,400 bad request,aprovado,
+11,Não é possivel adicionar produtos a um kit dados invalidos (numero negativo),1. Envie uma solicitação POST para /api/v1/kits/7/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": -1,
+            ""quantity"": 1
+        }
+    ]
+}",400 bad request,200 ok,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-2
+12,Não é possivel adicionar produtos a um kit dados invalidos (caracteres não latinos),1. Envie uma solicitação POST para /api/v1/kits/7/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": ""п"",
+            ""quantity"": 1
+        }
+    ]
+}",400 bad request,500 internal server error,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-3
+13,Não é possivel adicionar produtos a um kit dados invalidos (string),1. Envie uma solicitação POST para /api/v1/kits/7/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": ""numero 4"",
+            ""quantity"": 1
+        }
+    ]
+}",400 bad request,500 internal server error,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-4
+14,Não é possivel adicionar produtos a um kit dados invalidos (numeros fracionados),1. Envie uma solicitação POST para /api/v1/kits/7/products com dados invalidos,"{
+    ""productsList"": [
+        {
+            ""id"": 4.5,
+            ""quantity"": 1
+        }
+    ]
+}",400 bad request,500 internal server error,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-5
+15,,,,,,,
+16,Requisito 2: /order-and-go/v1/delivery,,,,,,
+17,"Assumindo a validade dos outros campos, é possível entregar um produto dentro do horario (8 horas)",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 8,
+    ""productsCount"": 10,
+    ""productsWeight"": 11
+}",200 ok,200 ok,aprovado,
+18,"Assumindo a validade dos outros campos, é possível entregar um produto dentro do horario (22 horas)",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 22,
+    ""productsCount"": 10,
+    ""productsWeight"": 11
+}",200 ok,200 ok,aprovado,
+19,Não é possível entregar um produto fora do horario (7:59 horas),1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados invalidos,"{
+    ""deliveryTime"": 7.59,
+    ""productsCount"": 10,
+    ""productsWeight"": 11
+}",200 ok,200 ok,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-6
+20,Não é possível entregar um produto fora do horario (22:01 horas),1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados invalidos,"{
+    ""deliveryTime"": 22.01,
+    ""productsCount"": 10,
+    ""productsWeight"": 11
+}",200 ok,200 ok,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-7
+21,"Assumindo a validade dos outros campos, ao realizar uma entrega com:  (0 produtos) temos: hostDeliveryCost é 3 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 0,
+    ""productsWeight"": 0
+}",hostDeliveryCost é 3 - clientDeliveryCost é 0,hostDeliveryCost é 3 - clientDeliveryCost é 0,Aprovado,
+22,"Assumindo a validade dos outros campos, ao realizar uma entrega com:   (1 produtos)  temos: hostDeliveryCost é 3 - clientDeliveryCost é 0 ",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 1
+}",hostDeliveryCost é 3 - clientDeliveryCost é 0,hostDeliveryCost é 3 - clientDeliveryCost é 0,Aprovado,
+23,"Assumindo a validade dos outros campos, ao realizar uma entrega com:   (8 produtos)  temos: hostDeliveryCost é 3 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 8,
+    ""productsWeight"": 1
+}",hostDeliveryCost é 3 - clientDeliveryCost é 0,hostDeliveryCost é 3 - clientDeliveryCost é 0,Aprovado,
+24,"Assumindo a validade dos outros campos, ao realizar uma entrega com:   (9 produtos)  temos: hostDeliveryCost é 5 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 9,
+    ""productsWeight"": 1
+}",hostDeliveryCost é 5 - clientDeliveryCost é 0,hostDeliveryCost é 5 - clientDeliveryCost é 0,Aprovado,
+25,"Assumindo a validade dos outros campos, ao realizar uma entrega com:   (15 produtos)  temos: hostDeliveryCost é 5 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 15,
+    ""productsWeight"": 1
+}",hostDeliveryCost é 5 - clientDeliveryCost é 0,hostDeliveryCost é 5 - clientDeliveryCost é 0,Aprovado,
+26,"Assumindo a validade dos outros campos, ao realizar uma entrega com:   (16+ produtos)  temos: hostDeliveryCost é 5 - clientDeliveryCost é 9",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 16,
+    ""productsWeight"": 1
+}",hostDeliveryCost é 5 - clientDeliveryCost é 9,hostDeliveryCost é 5 - clientDeliveryCost é 5,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-8
+27,"Assumindo a validade dos outros campos, ao realizar uma entrega com: (0 kg) temos: hostDeliveryCost é 3 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 0
+}",hostDeliveryCost é 3 - clientDeliveryCost é 0,hostDeliveryCost é 3 - clientDeliveryCost é 0,Aprovado,
+28,"Assumindo a validade dos outros campos, ao realizar uma entrega com: (0.1 kg) temos: hostDeliveryCost é 3 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 0.1
+}",hostDeliveryCost é 3 - clientDeliveryCost é 0,hostDeliveryCost é 3 - clientDeliveryCost é 0,Aprovado,
+29,"Assumindo a validade dos outros campos, ao realizar uma entrega com: (2.9 kg) temos: hostDeliveryCost é 3 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 2.9
+}",hostDeliveryCost é 3 - clientDeliveryCost é 0,hostDeliveryCost é 3 - clientDeliveryCost é 0,Aprovado,
+30,"Assumindo a validade dos outros campos, ao realizar uma entrega com: (3 kg) temos: hostDeliveryCost é 3 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 3
+}",hostDeliveryCost é 3 - clientDeliveryCost é 0,hostDeliveryCost é 3 - clientDeliveryCost é 0,Aprovado,
+31,"Assumindo a validade dos outros campos, ao realizar uma entrega com: (3.1 kg) temos: hostDeliveryCost é 5 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 3.1
+}",hostDeliveryCost é 5 - clientDeliveryCost é 0,hostDeliveryCost é 3 - clientDeliveryCost é 0,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-9
+32,"Assumindo a validade dos outros campos, ao realizar uma entrega com: (5.9 kg) temos: hostDeliveryCost é 5 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 5
+}",hostDeliveryCost é 5 - clientDeliveryCost é 0,hostDeliveryCost é 5 - clientDeliveryCost é 0,Aprovado,
+33,"Assumindo a validade dos outros campos, ao realizar uma entrega com: (6 kg) temos: hostDeliveryCost é 5 - clientDeliveryCost é 0",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 6
+}",hostDeliveryCost é 5 - clientDeliveryCost é 0,hostDeliveryCost é 5 - clientDeliveryCost é 0,Aprovado,
+34,"Assumindo a validade dos outros campos, ao realizar uma entrega com: (6.1+ kg) temos: hostDeliveryCost é 5 - clientDeliveryCost é 9",1. Envie uma solicitação POST para /order-and-go/v1/delivery com dados validos,"{
+    ""deliveryTime"": 9,
+    ""productsCount"": 1,
+    ""productsWeight"": 7
+}",hostDeliveryCost é 5 - clientDeliveryCost é 9,hostDeliveryCost é 5 - clientDeliveryCost é 5,Reprovado,https://pauloborges091.atlassian.net/browse/TS4-10
